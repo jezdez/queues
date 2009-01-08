@@ -22,7 +22,7 @@ Other backends that might be worth checking out
 """
 import os
 
-__version__ = "0.2"
+__version__ = "0.3"
 
 class InvalidBackend(Exception):
     pass

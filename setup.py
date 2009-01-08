@@ -3,7 +3,7 @@
 from distutils.core import setup
 import queues
 setup(name='queues',
-      version='0.2',
+      version='0.3',
       description='A lowest-common-denominator API for interacting with lightweight queue services.',
       author='Matt Croydon',
       author_email='mcroydon@gmail.com',
