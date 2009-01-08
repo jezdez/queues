@@ -9,5 +9,6 @@ setup(name='queues',
       author_email='mcroydon@gmail.com',
       url='http://postneo.com', # TODO: Fixme
       packages=['queues', 'queues.backends'],
+      py_modules=['test'],
       package_dir={'queues': 'queues'},
      )
