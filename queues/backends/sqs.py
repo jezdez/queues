@@ -17,8 +17,8 @@ except ImportError:
 
 try:
     from django.conf import settings
-    KEY = settings.get('AWS_ACCESS_KEY_ID', None)
-    SECRET = settings.get('AWS_SECRET_ACCESS_KEY', None)
+    KEY = getattr(settings, 'AWS_ACCESS_KEY_ID', None)
+    SECRET = getattr(settings, 'AWS_SECRET_ACCESS_KEY', None)
 except:
     KEY = os.environ.get('AWS_ACCESS_KEY_ID', None)
     SECRET = os.environ.get('AWS_SECRET_ACCESS_KEY', None)

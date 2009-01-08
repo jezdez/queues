@@ -19,7 +19,7 @@ except ImportError:
 
 try:
     from django.conf import settings
-    CONN = settings.get('QUEUE_MEMCACHE_CONNECTION', None)
+    CONN = getattr(settings, 'QUEUE_MEMCACHE_CONNECTION', None)
 except:
     CONN = os.environ.get('QUEUE_MEMCACHE_CONNECTION', None)
 

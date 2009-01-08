@@ -37,7 +37,7 @@ class QueueException(Exception):
 # If set both places, django takes precedence.
 try:
     from django.conf import settings
-    BACKEND = settings.get('QUEUE_BACKEND', None)
+    BACKEND = getattr(settings, 'QUEUE_BACKEND', None)
 except:
     BACKEND = os.environ.get('QUEUE_BACKEND')
 
