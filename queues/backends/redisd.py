@@ -36,6 +36,12 @@ try:
 except ValueError:
     raise InvalidBackend("Port portion of QUEUE_REDIS_CONNECTION should be an integer.")
 
+def _get_connection(host=host, port=port, db=DB):
+    kwargs = {'host' : host, 'port' : port}
+    if DB:
+        kwargs['db'] = DB
+    return redis.Redis(**kwargs)
+
 class Queue(BaseQueue):
     def __init__(self, name):
         try:            
@@ -44,7 +50,7 @@ class Queue(BaseQueue):
             kwargs = {'host' : host, 'port' : int(port)}
             if DB:
                 kwargs['db'] = DB
-            self._connection = redis.Redis(**kwargs)
+            self._connection = _get_connection()
         except redis.RedisError, e:
             raise QueueException, "%s" % e
 
@@ -78,9 +84,10 @@ def create_queue():
     return True
 
 def delete_queue(name):
+    """Delete a queue"""
     try:
-        resp = redis.Redis().delete(name)
-        if resp:
+        resp = _get_connection().delete(name)
+        if resp and resp == 1:
             return True
         else:
             return False
@@ -88,4 +95,4 @@ def delete_queue(name):
         raise QueueException, "%s" % e
 
 def get_list():
-    return redis.Redis().keys('*')
+    return _get_connection().keys('*')
