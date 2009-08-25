@@ -28,8 +28,8 @@ we just wrote will be immediately available
 1
 
 Read from the queue
->>> q.read()
-'test'
+>>> unicode(q.read())
+u'test'
 
 The queue should now be empty
 Note that SQS doesn't guarantee an accurate count
