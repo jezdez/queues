@@ -7,13 +7,16 @@ import Queue as queue
 from queues import QueueException
 from queues.backends.base import BaseQueue
 
+queues = {}
 
-dummy_queue = queue.Queue()
-
+def get_queue(name):
+    if name not in queues:
+        queues[name] = queue.Queue()
+    return queues[name]
 
 class Queue(BaseQueue):
     def __init__(self, name='default'):
-        self.queue = dummy_queue
+        self.queue = get_queue(name)
         self.backend = 'dummy'
         self.name = name
 
