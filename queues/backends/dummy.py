@@ -49,10 +49,8 @@ def create_queue():
 def delete_queue(name):
     """Just start afresh."""
     try:
-        while True:
-            dummy_queue.get(block=False)
-    except queue.Empty:
-        # Yay, exhausted.
+        del queues[name]
+    except KeyError:
         pass
 
 
