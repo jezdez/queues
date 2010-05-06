@@ -56,13 +56,13 @@ class Queue(BaseQueue):
 
     def read(self):
         try:
-            return self._connection.pop(self.name)
+            return self._connection.lpop(self.name)
         except redis.RedisError, e:
             raise QueueException, "%s" % e
 
     def write(self, value):
         try:
-            resp = self._connection.push(self.name, value)
+            resp = self._connection.lpush(self.name, value)
             if resp == 'OK':
                 return True
             else:
