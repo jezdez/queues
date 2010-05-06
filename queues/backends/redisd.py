@@ -62,7 +62,7 @@ class Queue(BaseQueue):
 
     def write(self, value):
         try:
-            resp = self._connection.lpush(self.name, value)
+            resp = self._connection.rpush(self.name, value)
             if resp == 'OK':
                 return True
             else:
