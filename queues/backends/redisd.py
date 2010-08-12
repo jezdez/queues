@@ -40,8 +40,8 @@ except ValueError:
 
 def _get_connection(host=host, port=port, db=DB, timeout=TIMEOUT):
     kwargs = {'host' : host, 'port' : port}
-    if DB:
-        kwargs['db'] = DB
+    if db:
+        kwargs['db'] = db
     if timeout:
         kwargs['timeout'] = timeout
     return redis.Redis(**kwargs)
@@ -51,9 +51,6 @@ class Queue(BaseQueue):
         try:            
             self.name = name
             self.backend = 'redis'
-            kwargs = {'host' : host, 'port' : int(port)}
-            if DB:
-                kwargs['db'] = DB
             self._connection = _get_connection()
         except redis.RedisError, e:
             raise QueueException, "%s" % e
