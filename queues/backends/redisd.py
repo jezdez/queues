@@ -63,7 +63,7 @@ class Queue(BaseQueue):
     def write(self, value):
         try:
             resp = self._connection.rpush(self.name, value)
-            if resp == 'OK':
+            if resp in ('OK', 1):
                 return True
             else:
                 return False
